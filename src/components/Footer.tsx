@@ -1,102 +1,112 @@
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Send, Heart } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "../assets/GRAMA RUCHI PICKLES Logo.jpeg.jpg";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-amber-50 to-[#FFF8F0] border-t border-amber-200 pt-12 pb-6 mt-16">
+    <footer className="bg-[#8B4513] border-t border-[#D2B48C] pt-12 pb-6 mt-16">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Brand */}
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full overflow-hidden shadow-md">
-              <img
-                src={logo}
-                alt="Grama Ruchii Pickle Logo"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <h2 className="text-xl font-extrabold text-[#78350F]">Grama Ruchii Pickle</h2>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
+          <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg border-2 border-[#8B4513] flex-shrink-0">
+            <img
+              src={logo}
+              alt="Grama Ruchii Pickle Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <p className="text-slate-600 text-sm leading-relaxed">
-            Premium handcrafted Indian snacks — made with love, heritage, and a touch of modern flavor.
-          </p>
-          <div className="flex items-center gap-4 mt-5">
-            {[Facebook, Instagram, Twitter].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="p-2 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-500 hover:text-white transition"
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+          <div className="mt-4 sm:mt-0 sm:ml-2">
+            <h2 className="text-xl font-extrabold text-white">Grama Ruchii Pickle</h2>
+            <p className="text-white text-sm leading-relaxed mt-1 sm:mt-2">
+              Premium handcrafted Indian snacks — made with love, heritage, and modern flavor.
+            </p>
+            <div className="flex items-center gap-4 mt-3">
+              {[Facebook, Instagram, Twitter].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="p-2 rounded-full bg-gradient-to-r from-[#8B4513] to-[#D2B48C] text-white hover:from-[#D2B48C] hover:to-[#8B4513] hover:text-white transition shadow-md"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold text-amber-700 mb-4">Quick Links</h3>
-          {["Home", "About Us", "Products", "Contact"].map((item, i) => (
-            <a
-              key={i}
-              href={`/${item.toLowerCase().replace(" ", "")}`}
-              className="block text-slate-600 text-sm mb-2 hover:text-amber-600 transition"
-            >
-              {item}
-            </a>
-          ))}
-        </div>
+  <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+  <Link
+    to="/"
+    className="block text-white text-sm mb-2 hover:text-yellow-300 hover:underline transition"
+  >
+    Home
+  </Link>
+  <Link
+    to="/about"
+    className="block text-white text-sm mb-2 hover:text-yellow-300 hover:underline transition"
+  >
+    About Us
+  </Link>
+  <Link
+    to="/products"
+    className="block text-white text-sm mb-2 hover:text-yellow-300 hover:underline transition"
+  >
+    Products
+  </Link>
+  <Link
+    to="/contact"
+    className="block text-white text-sm mb-2 hover:text-yellow-300 hover:underline transition"
+  >
+    Contact
+  </Link>
+</div>
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-lg font-semibold text-amber-700 mb-4">Contact</h3>
-          <ul className="space-y-3 text-sm text-slate-600">
+          <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
+          <ul className="space-y-3 text-sm text-white">
             <li className="flex items-center gap-3">
-              <MapPin size={16} className="text-amber-600" /> Vijayawada, AP
+              <MapPin size={16} className="text-white" /> Vijayawada, AP
             </li>
             <li className="flex items-center gap-3">
-              <Phone size={16} className="text-amber-600" /> +91 98765 43210
+              <Phone size={16} className="text-white" /> +91 98765 43210
             </li>
             <li className="flex items-center gap-3">
-              <Mail size={16} className="text-amber-600" /> hello@retrofoods.in
+              <Mail size={16} className="text-white" /> hello@retrofoods.in
             </li>
           </ul>
         </div>
 
-        {/* Newsletter */}
+        {/* Address */}
         <div>
-          <h3 className="text-lg font-semibold text-amber-700 mb-4">Stay Updated</h3>
-          <form className="flex items-center bg-white border border-amber-300 rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-amber-400 shadow-sm">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="px-4 py-2 w-full outline-none text-sm"
-            />
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-amber-500 to-yellow-400 text-white px-4 py-2 hover:opacity-90 transition flex items-center gap-1"
-            >
-              <Send size={16} /> Subscribe
-            </button>
-          </form>
+          <h3 className="text-lg font-semibold text-white mb-4">Address</h3>
+          <p className="text-white text-sm leading-relaxed">
+            Neredcherla<br />
+            Neredcherla<br />
+            Suryapet, 508218<br />
+            Telangana<br />
+            India
+          </p>
         </div>
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-amber-100 mt-10 pt-4 text-center text-sm text-slate-500">
+      <div className="border-t border-[#D2B48C] mt-10 pt-4 text-center text-sm text-white">
         © {new Date().getFullYear()}{" "}
-        <span className="font-semibold text-amber-600">Grama Ruchii Pickle</span> — Crafted with ❤️ in India.
+        <span className="font-semibold text-white">Grama Ruchii Pickle</span> — Crafted with ❤️ in India.
       </div>
 
-      {/* 🔸 StaffArc Credit Line */}
-      <div className="border-t border-amber-200 mt-6 pt-4 text-center text-sm text-slate-600">
-        <div className="flex justify-center items-center gap-1">
+      {/* StaffArc Credit */}
+      <div className="border-t border-[#D2B48C] mt-6 pt-4 text-center text-sm text-white">
+        <div className="flex justify-center items-center gap-1 flex-wrap">
           Made with <Heart className="inline h-4 w-4 text-red-500 mx-1" /> by
           <a
             href="https://staffarc.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-orange-600 hover:underline ml-1"
+            className="flex items-center gap-1 text-white hover:underline ml-1"
           >
             <img
               src="https://www.staffarc.in/images/Staffarc-logo.png"

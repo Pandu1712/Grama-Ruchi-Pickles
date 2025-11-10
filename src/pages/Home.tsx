@@ -14,7 +14,7 @@ export default function Home() {
       <Cursoal />
       <Product/>
       <About />
-        <Contact />
+      <Contact />
      
     </>
   );

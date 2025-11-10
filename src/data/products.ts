@@ -107,7 +107,7 @@ export const products: Product[] = [
     id: "veg-010",
     name: "Ridge Gourd (Beerakaya) Pickle",
     category: "Veg",
-    img: "https://res.cloudinary.com/dd4oiwnep/image/upload/v1762680330/Bitter_Gourd_Kakarakaya_Pickle_t8ivyk.jpg",
+    img: "https://res.cloudinary.com/dd4oiwnep/image/upload/v1762769921/Ridge_Gourd_Beerakaya_Pickle_ly072c.jpg",
     prices: { "250g": 100, "500g": 190, "1000g": 340 },
     description: "Unique ridge gourd pickle blended with red chili and tamarind.",
   },

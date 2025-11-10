@@ -5,16 +5,21 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import CartPage from "./pages/CartPage";
 import Footer from "./components/Footer";
+import Products from "../src/pages/ProductsPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <>
+    <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/product" element={<Products />} />
+
       </Routes>
       <Footer/>
     </>
