@@ -1,4 +1,3 @@
-// src/ProductsPage.tsx
 import { useMemo, useState } from "react";
 import { products as catalog, categories } from "../data/products";
 import { useCart } from "../context/CartContext";
@@ -50,26 +49,16 @@ export default function ProductsPage() {
 
     dispatch({
       type: "ADD",
-      payload: {
-        productId,
-        name: product.name,
-        weight,
-        qty,
-        unitPrice,
-        img: product.img,
-        variant: undefined,
-      },
+      payload: { productId, name: product.name, weight, qty, unitPrice, img: product.img, variant: undefined },
     });
   };
 
   return (
-    <main className="min-h-screen py-12 text-[#8B4513]">
+    <main className="min-h-screen py-12 text-[#8B4513] bg-[#f5f2ef]">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-wide">
-            Gourmet Snacks & Pickles
-          </h1>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-wide">Gourmet Snacks & Pickles</h1>
           <button
             onClick={() => setShowCategories(!showCategories)}
             className="md:hidden bg-yellow-500 text-[#8B4513] px-4 py-2 rounded-full font-semibold shadow hover:bg-yellow-400 transition"
@@ -78,22 +67,19 @@ export default function ProductsPage() {
           </button>
         </div>
 
-        <div className="grid md:grid-cols-5 gap-8 -ml-24">
+        <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
           <aside
-            className={`md:col-span-1 bg-[#5C4033] rounded-2xl p-6 shadow-lg h-fit md:sticky md:top-28 transition-all duration-300 ${
+            className={`bg-[#5C4033] rounded-2xl p-4 md:p-6 shadow-lg h-fit md:sticky md:top-28 transition-all duration-300 ${
               showCategories ? "block" : "hidden md:block"
-            }`}
+            } w-full md:w-1/4`}
           >
             <h2 className="text-lg font-semibold mb-4 text-yellow-300">Categories</h2>
             <div className="flex flex-col gap-3">
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => {
-                    setActiveCategory(cat);
-                    setShowCategories(false);
-                  }}
+                  onClick={() => { setActiveCategory(cat); setShowCategories(false); }}
                   className={`text-left px-4 py-2 rounded-xl text-white transition-all duration-300 font-medium ${
                     activeCategory === cat ? "bg-yellow-500 shadow-md" : "hover:bg-yellow-600/20"
                   }`}
@@ -104,33 +90,26 @@ export default function ProductsPage() {
             </div>
 
             {/* Price Filter */}
-            <div className="mt-8">
+            <div className="mt-6">
               <h3 className="text-sm font-medium text-yellow-300 mb-2">Filter by Price</h3>
               <div className="flex gap-2">
                 <input
                   type="number"
                   placeholder="Min"
                   value={minPrice as any}
-                  onChange={(e) =>
-                    setMinPrice(e.target.value === "" ? "" : Number(e.target.value))
-                  }
+                  onChange={(e) => setMinPrice(e.target.value === "" ? "" : Number(e.target.value))}
                   className="w-1/2 px-3 py-2 rounded-lg text-[#8B4513]"
                 />
                 <input
                   type="number"
                   placeholder="Max"
                   value={maxPrice as any}
-                  onChange={(e) =>
-                    setMaxPrice(e.target.value === "" ? "" : Number(e.target.value))
-                  }
+                  onChange={(e) => setMaxPrice(e.target.value === "" ? "" : Number(e.target.value))}
                   className="w-1/2 px-3 py-2 rounded-lg text-[#8B4513]"
                 />
               </div>
               <button
-                onClick={() => {
-                  setMinPrice("");
-                  setMaxPrice("");
-                }}
+                onClick={() => { setMinPrice(""); setMaxPrice(""); }}
                 className="mt-3 text-sm text-yellow-400 hover:underline"
               >
                 Reset
@@ -146,7 +125,7 @@ export default function ProductsPage() {
           </aside>
 
           {/* Products Grid */}
-          <section className="md:col-span-4">
+          <section className="flex-1">
             <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
               <input
                 value={q}
@@ -159,40 +138,19 @@ export default function ProductsPage() {
                 onChange={(e) => setActiveCategory(e.target.value)}
                 value={activeCategory}
               >
-                {categories.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
+                {categories.map((c) => (<option key={c} value={c}>{c}</option>))}
               </select>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
               {filtered.map((p: Product) => (
-                <div
-                  key={p.id}
-                  className="bg-[#5C4033] rounded-2xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition"
-                >
+                <div key={p.id} className="bg-[#5C4033] rounded-2xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition">
                   {/* Image + Tag */}
-                  <div className="relative w-180 h-80">
-                    <img
-                      src={p.img}
-                      alt={p.name}
-                      className="w-full h-full object-cover"
-                    />
-
-                    {p.tag && (
-                      <span className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow">
-                        {p.tag}
-                      </span>
-                    )}
-
+                  <div className="relative w-full h-64 sm:h-56 md:h-64 lg:h-72">
+                    <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                    {p.tag && <span className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow">{p.tag}</span>}
                     {p.isVeg !== undefined && (
-                      <span
-                        className={`absolute top-2 right-2 px-2 py-1 text-xs font-bold rounded shadow ${
-                          p.isVeg ? "bg-green-600 text-white" : "bg-gray-800 text-red-400"
-                        }`}
-                      >
+                      <span className={`absolute top-2 right-2 px-2 py-1 text-xs font-bold rounded shadow ${p.isVeg ? "bg-green-600 text-white" : "bg-gray-800 text-red-400"}`}>
                         {p.isVeg ? "Veg" : "Non-Veg"}
                       </span>
                     )}
@@ -201,50 +159,31 @@ export default function ProductsPage() {
                   {/* Name & Price */}
                   <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-white font-bold text-lg mb-1 truncate">
-                        {p.name}
-                      </h3>
-                      <p className="text-yellow-300 text-sm mb-3">
-                        From Rs. {p.prices["250g"]}
-                      </p>
+                      <h3 className="text-white font-bold text-lg mb-1 truncate">{p.name}</h3>
+                      <p className="text-yellow-300 text-sm mb-3">From Rs. {p.prices["250g"]}</p>
 
                       {/* Weight Dropdown */}
                       <select
                         className="w-full mt-2 px-3 py-2 rounded bg-[#8B4513] text-white border border-yellow-300"
                         value={weightMap[p.id] || "250g"}
-                        onChange={(e) =>
-                          setWeightMap((s) => ({ ...s, [p.id]: e.target.value as WeightKey }))
-                        }
+                        onChange={(e) => setWeightMap((s) => ({ ...s, [p.id]: e.target.value as WeightKey }))}
                       >
                         {weightOptions.map((w) => (
-                          <option key={w} value={w}>
-                            {w} - Rs. {p.prices[w]}
-                          </option>
+                          <option key={w} value={w}>{w} - Rs. {p.prices[w]}</option>
                         ))}
                       </select>
 
                       {/* Quantity Selector */}
                       <div className="flex items-center mt-3 gap-3">
                         <button
-                          onClick={() =>
-                            setQtyMap((s) => ({
-                              ...s,
-                              [p.id]: Math.max(1, (s[p.id] || 1) - 1),
-                            }))
-                          }
+                          onClick={() => setQtyMap((s) => ({ ...s, [p.id]: Math.max(1, (s[p.id] || 1) - 1) }))}
                           className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded font-bold"
-                        >
-                          -
-                        </button>
+                        >-</button>
                         <span className="text-white font-semibold">{qtyMap[p.id] || 1}</span>
                         <button
-                          onClick={() =>
-                            setQtyMap((s) => ({ ...s, [p.id]: (s[p.id] || 1) + 1 }))
-                          }
+                          onClick={() => setQtyMap((s) => ({ ...s, [p.id]: (s[p.id] || 1) + 1 }))}
                           className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded font-bold"
-                        >
-                          +
-                        </button>
+                        >+</button>
                       </div>
                     </div>
 

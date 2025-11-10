@@ -68,7 +68,7 @@ export default function Footer() {
           <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
           <ul className="space-y-3 text-sm text-white">
             <li className="flex items-center gap-3">
-              <MapPin size={16} className="text-white" /> Vijayawada, AP
+              <MapPin size={16} className="text-white" /> Suryapeta, Telangana
             </li>
             <li className="flex items-center gap-3">
               <Phone size={16} className="text-white" /> +91 98765 43210
