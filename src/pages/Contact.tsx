@@ -48,7 +48,7 @@ export default function Contact() {
             <div className="relative">
               <iframe
                 title="Grama Ruchii Pickle Location"
-                src="https://maps.apple/r/JB3cg6eKHoZmrA"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7635.563455776866!2d79.6939016!3d16.88668865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35230013a8a64d%3A0x41c222722266e1f3!2sNereducharla%2C%20Telangana%20508218!5e0!3m2!1sen!2sin!4v1762771840718!5m2!1sen!2sin"
                 width="100%"
                 height="250"
                 style={{ border: 0 }}
@@ -162,7 +162,7 @@ export default function Contact() {
       <div className="mt-10 md:hidden">
         <iframe
           title="Grama Ruchii Pickle Mobile Map"
-          src="https://maps.apple/r/JB3cg6eKHoZmrA"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7635.563455776866!2d79.6939016!3d16.88668865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35230013a8a64d%3A0x41c222722266e1f3!2sNereducharla%2C%20Telangana%20508218!5e0!3m2!1sen!2sin!4v1762771840718!5m2!1sen!2sin"
           width="100%"
           height="250"
           style={{ border: 0 }}
