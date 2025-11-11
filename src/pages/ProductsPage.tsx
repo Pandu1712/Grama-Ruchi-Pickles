@@ -3,6 +3,7 @@ import { products as catalog, categories } from "../data/products";
 import { useCart } from "../context/CartContext";
 import type { WeightKey } from "../data/products";
 import { Link } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
 
 interface Product {
   id: string;
@@ -58,7 +59,9 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-wide">Gourmet Snacks & Pickles</h1>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-wide">
+            Gourmet Snacks & Pickles
+          </h1>
           <button
             onClick={() => setShowCategories(!showCategories)}
             className="md:hidden bg-yellow-500 text-[#8B4513] px-4 py-2 rounded-full font-semibold shadow hover:bg-yellow-400 transition"
@@ -79,9 +82,14 @@ export default function ProductsPage() {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => { setActiveCategory(cat); setShowCategories(false); }}
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    setShowCategories(false);
+                  }}
                   className={`text-left px-4 py-2 rounded-xl text-white transition-all duration-300 font-medium ${
-                    activeCategory === cat ? "bg-yellow-500 shadow-md" : "hover:bg-yellow-600/20"
+                    activeCategory === cat
+                      ? "bg-yellow-500 shadow-md"
+                      : "hover:bg-yellow-600/20"
                   }`}
                 >
                   {cat}
@@ -91,25 +99,34 @@ export default function ProductsPage() {
 
             {/* Price Filter */}
             <div className="mt-6">
-              <h3 className="text-sm font-medium text-yellow-300 mb-2">Filter by Price</h3>
+              <h3 className="text-sm font-medium text-yellow-300 mb-2">
+                Filter by Price
+              </h3>
               <div className="flex gap-2">
                 <input
                   type="number"
                   placeholder="Min"
                   value={minPrice as any}
-                  onChange={(e) => setMinPrice(e.target.value === "" ? "" : Number(e.target.value))}
+                  onChange={(e) =>
+                    setMinPrice(e.target.value === "" ? "" : Number(e.target.value))
+                  }
                   className="w-1/2 px-3 py-2 rounded-lg text-[#8B4513]"
                 />
                 <input
                   type="number"
                   placeholder="Max"
                   value={maxPrice as any}
-                  onChange={(e) => setMaxPrice(e.target.value === "" ? "" : Number(e.target.value))}
+                  onChange={(e) =>
+                    setMaxPrice(e.target.value === "" ? "" : Number(e.target.value))
+                  }
                   className="w-1/2 px-3 py-2 rounded-lg text-[#8B4513]"
                 />
               </div>
               <button
-                onClick={() => { setMinPrice(""); setMaxPrice(""); }}
+                onClick={() => {
+                  setMinPrice("");
+                  setMaxPrice("");
+                }}
                 className="mt-3 text-sm text-yellow-400 hover:underline"
               >
                 Reset
@@ -138,62 +155,146 @@ export default function ProductsPage() {
                 onChange={(e) => setActiveCategory(e.target.value)}
                 value={activeCategory}
               >
-                {categories.map((c) => (<option key={c} value={c}>{c}</option>))}
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
               {filtered.map((p: Product) => (
-                <div key={p.id} className="bg-[#5C4033] rounded-2xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition">
+                <div
+                  key={p.id}
+                  className="bg-[#5C4033] rounded-2xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition"
+                >
                   {/* Image + Tag */}
                   <div className="relative w-full h-64 sm:h-56 md:h-64 lg:h-72">
                     <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
-                    {p.tag && <span className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow">{p.tag}</span>}
+                    {p.tag && (
+                      <span className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 text-xs font-bold rounded shadow">
+                        {p.tag}
+                      </span>
+                    )}
                     {p.isVeg !== undefined && (
-                      <span className={`absolute top-2 right-2 px-2 py-1 text-xs font-bold rounded shadow ${p.isVeg ? "bg-green-600 text-white" : "bg-gray-800 text-red-400"}`}>
+                      <span
+                        className={`absolute top-2 right-2 px-2 py-1 text-xs font-bold rounded shadow ${
+                          p.isVeg
+                            ? "bg-green-600 text-white"
+                            : "bg-gray-800 text-red-400"
+                        }`}
+                      >
                         {p.isVeg ? "Veg" : "Non-Veg"}
                       </span>
                     )}
                   </div>
 
-                  {/* Name & Price */}
-                  <div className="p-4 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-white font-bold text-lg mb-1 truncate">{p.name}</h3>
-                      <p className="text-yellow-300 text-sm mb-3">From Rs. {p.prices["250g"]}</p>
+                  {/* Details */}
+                  <div className="p-4 flex-1 flex flex-col justify-between relative">
+                    {/* Product Name */}
+                    <h3 className="text-white font-bold text-lg mb-2 truncate">{p.name}</h3>
 
-                      {/* Weight Dropdown */}
-                      <select
-                        className="w-full mt-2 px-3 py-2 rounded bg-[#8B4513] text-white border border-yellow-300"
-                        value={weightMap[p.id] || "250g"}
-                        onChange={(e) => setWeightMap((s) => ({ ...s, [p.id]: e.target.value as WeightKey }))}
-                      >
-                        {weightOptions.map((w) => (
-                          <option key={w} value={w}>{w} - Rs. {p.prices[w]}</option>
-                        ))}
-                      </select>
+                    {/* Mobile Cart Icon (bottom-left) */}
+                    <button
+                      onClick={() => handleAdd(p.id)}
+                      className="sm:hidden absolute top-8 left-64 bg-yellow-400 hover:bg-yellow-300 text-[#8B4513] p-2 rounded-full shadow transition"
+                      title="Add to Cart"
+                    >
+                      <ShoppingCart size={20} />
+                    </button>
 
-                      {/* Quantity Selector */}
-                      <div className="flex items-center mt-3 gap-3">
+                    <p className="text-yellow-300 text-sm mb-3">
+                      From Rs. {p.prices["250g"]}
+                    </p>
+
+                    {/* Weight Selector */}
+                    <select
+                      className="w-full mt-2 px-3 py-2 rounded bg-[#8B4513] text-white border border-yellow-300"
+                      value={weightMap[p.id] || "250g"}
+                      onChange={(e) =>
+                        setWeightMap((s) => ({
+                          ...s,
+                          [p.id]: e.target.value as WeightKey,
+                        }))
+                      }
+                    >
+                      {weightOptions.map((w) => (
+                        <option key={w} value={w}>
+                          {w} - Rs. {p.prices[w]}
+                        </option>
+                      ))}
+                    </select>
+
+                    {/* Quantity Selector */}
+                    {/* Mobile center-aligned version */}
+                    <div className="flex justify-center sm:hidden mt-4">
+                      <div className="flex items-center gap-3 bg-[#704833] px-4 py-2 rounded-full">
                         <button
-                          onClick={() => setQtyMap((s) => ({ ...s, [p.id]: Math.max(1, (s[p.id] || 1) - 1) }))}
-                          className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded font-bold"
-                        >-</button>
-                        <span className="text-white font-semibold">{qtyMap[p.id] || 1}</span>
+                          onClick={() =>
+                            setQtyMap((s) => ({
+                              ...s,
+                              [p.id]: Math.max(1, (s[p.id] || 1) - 1),
+                            }))
+                          }
+                          className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded-full font-bold"
+                        >
+                          -
+                        </button>
+                        <span className="text-white font-semibold">
+                          {qtyMap[p.id] || 1}
+                        </span>
                         <button
-                          onClick={() => setQtyMap((s) => ({ ...s, [p.id]: (s[p.id] || 1) + 1 }))}
-                          className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded font-bold"
-                        >+</button>
+                          onClick={() =>
+                            setQtyMap((s) => ({
+                              ...s,
+                              [p.id]: (s[p.id] || 1) + 1,
+                            }))
+                          }
+                          className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded-full font-bold"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
 
-                    {/* Add to Cart */}
-                    <button
-                      onClick={() => handleAdd(p.id)}
-                      className="mt-4 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 rounded-full transition"
-                    >
-                      ADD TO CART
-                    </button>
+                    {/* Desktop layout for quantity + Add to Cart */}
+                    <div className="hidden sm:flex items-center justify-between mt-4">
+                      <div className="flex items-center gap-3 bg-[#704833] px-3 py-2 rounded-full">
+                        <button
+                          onClick={() =>
+                            setQtyMap((s) => ({
+                              ...s,
+                              [p.id]: Math.max(1, (s[p.id] || 1) - 1),
+                            }))
+                          }
+                          className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded-full font-bold"
+                        >
+                          -
+                        </button>
+                        <span className="text-white font-semibold">
+                          {qtyMap[p.id] || 1}
+                        </span>
+                        <button
+                          onClick={() =>
+                            setQtyMap((s) => ({
+                              ...s,
+                              [p.id]: (s[p.id] || 1) + 1,
+                            }))
+                          }
+                          className="bg-yellow-500 text-[#8B4513] px-3 py-1 rounded-full font-bold"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        onClick={() => handleAdd(p.id)}
+                        className="bg-red-600 hover:bg-red-500 text-white font-semibold px-4 py-2 rounded-full transition"
+                      >
+                        Add To Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
